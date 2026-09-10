@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Lumina Store</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ==================== TELA: LOGIN ==================== -->
+<section id="screen-login" class="screen active">
+  <div class="auth-card">
+    <h1 class="brand">✨ Lumina Store</h1>
+    <p class="subtitle">Entrar na sua conta</p>
+
+    <form id="form-login">
+      <label>Número de Telefone</label>
+      <input type="tel" id="login-phone" placeholder="84xxxxxxx" required />
+
+      <label>Palavra-passe</label>
+      <div class="password-field">
+        <input type="password" id="login-password" placeholder="••••••••" required />
+        <button type="button" class="toggle-eye" data-target="login-password">👁</button>
+      </div>
+
+      <div id="login-error" class="form-error"></div>
+
+      <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+
+    <p class="switch-link">Não tem conta? <a href="#" id="go-to-register">Criar conta</a></p>
+  </div>
+</section>
+
+<!-- ==================== TELA: REGISTRO ==================== -->
+<section id="screen-register" class="screen">
+  <div class="auth-card">
+    <h1 class="brand">✨ Lumina Store</h1>
+    <p class="subtitle">Criar nova conta</p>
+
+    <form id="form-register">
+      <label>Número de Telefone</label>
+      <input type="tel" id="reg-phone" placeholder="84xxxxxxx" required />
+
+      <label>Palavra-passe</label>
+      <div class="password-field">
+        <input type="password" id="reg-password" placeholder="••••••••" required minlength="6" />
+        <button type="button" class="toggle-eye" data-target="reg-password">👁</button>
+      </div>
+
+      <label>Confirmar Palavra-passe</label>
+      <div class="password-field">
+        <input type="password" id="reg-password-confirm" placeholder="••••••••" required minlength="6" />
+        <button type="button" class="toggle-eye" data-target="reg-password-confirm">👁</button>
+      </div>
+
+      <label>Código de Convite (opcional)</label>
+      <input type="text" id="reg-invite-code" placeholder="Ex: LUM4821" />
+
+      <div id="register-error" class="form-error"></div>
+
+      <button type="submit" class="btn-primary">Criar Conta</button>
+    </form>
+
+    <p class="switch-link">Já tem conta? <a href="#" id="go-to-login">Entrar</a></p>
+  </div>
+</section>
+
+<!-- ==================== APP PRINCIPAL (pós-login) ==================== -->
+<section id="screen-app" class="screen">
+
+  <header class="app-header">
+    <span class="brand-small">✨ Lumina Store</span>
+    <button id="btn-logout" class="btn-icon" title="Sair">⏻</button>
+  </header>
+
+  <!-- ---- ABA: DASHBOARD / CARTEIRA ---- -->
+  <div id="tab-dashboard" class="tab-content active">
+    <div class="balance-card">
+      <p class="balance-label">Saldo disponível</p>
+      <h2 id="balance-value">0.00 MT</h2>
+      <div class="balance-actions">
+        <button id="btn-open-deposit" class="btn-action btn-deposit">⬇ Recarregar</button>
+        <button id="btn-open-withdraw" class="btn-action btn-withdraw">⬆ Sacar</button>
+      </div>
+    </div>
+
+    <div class="promo-banner">
+      ⚡ Promoção por tempo limitado: convide amigos e ganhe <strong>20% de comissão</strong> em cada compra deles!
+    </div>
+
+    <h3 class="section-title">Histórico de Transações</h3>
+    <ul id="transactions-list" class="tx-list">
+      <li class="empty-state">Ainda não há transações.</li>
+    </ul>
+  </div>
+
+  <!-- ---- ABA: PRODUTOS (LOJA) ---- -->
+  <div id="tab-products" class="tab-content">
+    <h3 class="section-title">Loja</h3>
+    <div id="products-grid" class="products-grid">
+      <p class="empty-state">A carregar produtos...</p>
+    </div>
+  </div>
+
+  <!-- ---- ABA: MEUS PRODUTOS ---- -->
+  <div id="tab-my-products" class="tab-content">
+    <h3 class="section-title">Meus Produtos</h3>
+    <div id="my-products-grid" class="products-grid">
+      <p class="empty-state">Ainda não comprou nenhum produto.</p>
+    </div>
+  </div>
+
+  <!-- ---- ABA: EQUIPA / AFILIADOS ---- -->
+  <div id="tab-team" class="tab-content">
+    <h3 class="section-title">Equipa & Indicações</h3>
+
+    <div class="referral-card">
+      <p class="referral-label">O seu código de convite</p>
+      <h2 id="referral-code">------</h2>
+
+      <p class="referral-label">O seu link de convite</p>
+      <div class="referral-link-row">
+        <input id="referral-link" type="text" readonly />
+        <button id="btn-copy-link" class="btn-action btn-copy">Copiar</button>
+      </div>
+    </div>
+
+    <div class="promo-banner">
+      ⏳ Aviso: a comissão de 20% por indicação é uma promoção por <strong>tempo limitado</strong> e pode ser alterada ou encerrada a qualquer momento.
+    </div>
+
+    <div class="team-stats">
+      <div class="stat-box">
+        <span id="team-count">0</span>
+        <p>Indicados</p>
+      </div>
+      <div class="stat-box">
+        <span id="team-earnings">0.00 MT</span>
+        <p>Comissões ganhas</p>
+      </div>
+    </div>
+
+    <h4 class="section-title">Meus Indicados</h4>
+    <ul id="team-list" class="tx-list">
+      <li class="empty-state">Ainda não tem indicados.</li>
+    </ul>
+  </div>
+
+  <!-- ---- NAV INFERIOR ---- -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-tab="tab-dashboard">
+      <span>💼</span><small>Carteira</small>
+    </button>
+    <button class="nav-btn" data-tab="tab-products">
+      <span>🛍</span><small>Loja</small>
+    </button>
+    <button class="nav-btn" data-tab="tab-my-products">
+      <span>📦</span><small>Meus Produtos</small>
+    </button>
+    <button class="nav-btn" data-tab="tab-team">
+      <span>👥</span><small>Equipa</small>
+    </button>
+  </nav>
+</section>
+
+<!-- ==================== MODAL: RECARREGAR ==================== -->
+<div id="modal-deposit" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Recarregar Saldo</h3>
+    <p class="modal-sub">Simulação de depósito via M-Pesa / e-Mola</p>
+
+    <label>Método</label>
+    <select id="deposit-method">
+      <option value="mpesa">M-Pesa</option>
+      <option value="emola">e-Mola</option>
+    </select>
+
+    <label>Número da conta móvel</label>
+    <input type="tel" id="deposit-phone" placeholder="84xxxxxxx" />
+
+    <label>Valor a depositar (MT)</label>
+    <input type="number" id="deposit-amount" min="1" placeholder="0.00" />
+
+    <div id="deposit-error" class="form-error"></div>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" data-close-modal="modal-deposit">Cancelar</button>
+      <button id="btn-confirm-deposit" class="btn-primary">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: SACAR ==================== -->
+<div id="modal-withdraw" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Solicitar Saque</h3>
+    <p class="modal-sub">Taxa de processamento de 5% aplicada automaticamente</p>
+
+    <label>Método</label>
+    <select id="withdraw-method">
+      <option value="mpesa">M-Pesa</option>
+      <option value="emola">e-Mola</option>
+    </select>
+
+    <label>Número da conta móvel</label>
+    <input type="tel" id="withdraw-phone" placeholder="84xxxxxxx" />
+
+    <label>Valor a sacar (MT)</label>
+    <input type="number" id="withdraw-amount" min="1" placeholder="0.00" />
+
+    <p id="withdraw-summary" class="modal-summary"></p>
+
+    <div id="withdraw-error" class="form-error"></div>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" data-close-modal="modal-withdraw">Cancelar</button>
+      <button id="btn-confirm-withdraw" class="btn-primary">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: COMPRAR PRODUTO ==================== -->
+<div id="modal-buy" class="modal-overlay">
+  <div class="modal-box">
+    <h3 id="buy-product-name">Produto</h3>
+    <p class="modal-sub" id="buy-product-desc"></p>
+    <p class="modal-summary" id="buy-product-price"></p>
+    <div id="buy-error" class="form-error"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" data-close-modal="modal-buy">Cancelar</button>
+      <button id="btn-confirm-buy" class="btn-primary">Confirmar Compra</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- Supabase SDK via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/wallet.js"></script>
+<script src="js/products.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
